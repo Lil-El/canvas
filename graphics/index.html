@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+      }
+    </style>
+  </head>
+
+  
+  <body>
+    <canvas id="canvas" width="1200" height="900"></canvas>
+    <script type="module">
+      import { Dot } from "./index.js";
+
+      const canvas = document.querySelector("#canvas");
+      Dot.setContext(canvas.getContext("2d"));
+      Dot.Critical = 80;
+
+      const dots = [];
+      for (let i = 0; i < 100; i++) {
+        dots[i] = new Dot(Math.random() * 1200, Math.random() * 900);
+      }
+
+      Dot.render(...dots);
+
+      canvas.addEventListener("mousemove", (evt) => {
+        const { clientX: x, clientY: y } = evt;
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          if (Dot.distance(d, { x, y }) <= Dot.radius) {
+            canvas.style = "cursor: pointer;";
+            break;
+          } else {
+            canvas.style = "cursor: default;";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
