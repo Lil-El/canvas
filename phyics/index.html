@@ -13,18 +13,21 @@
     </style>
   </head>
   <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="canvas" width="1800" height="600"></canvas>
     <script type="module">
       import { Circle } from "../graphics/circle.js";
 
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      const circle = new Circle(ctx, 100, 100, 20, "blue");
+      const circle = new Circle(ctx, 900, 300, 20, "blue");
+      const circle1 = new Circle(ctx, 500, 300, 20, "red");
 
       (function render() {
         requestAnimationFrame(render);
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         circle.draw();
+        circle1.draw();
       })();
     </script>
   </body>
